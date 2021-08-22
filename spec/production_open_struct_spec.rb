@@ -3,10 +3,14 @@
 require_relative "spec_helper"
 
 # Run the specs both before and after overriding OpenStruct behavior.
-2.times do
-  describe "OpenStruct #{OpenStruct.include?(ProductionOpenStruct) ? "with" : "without"} ProductionOpenStruct" do
+%w(without with).each do |behavior|
+  describe "OpenStruct #{behavior} ProductionOpenStruct" do
     after(:all) do
       OpenStruct.prepend(ProductionOpenStruct)
+    end
+
+    it "should be testing the correct behavior" do
+      expect(behavior).to eq(OpenStruct.include?(ProductionOpenStruct) ? "with" : "without")
     end
 
     it "should have getters and setters for the hash keys" do
