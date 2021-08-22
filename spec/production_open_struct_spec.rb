@@ -3,7 +3,7 @@
 require_relative "spec_helper"
 
 # Run the specs both before and after overriding OpenStruct behavior.
-%w(without with).each do |behavior|
+%w[without with].each do |behavior|
   describe "OpenStruct #{behavior} ProductionOpenStruct" do
     after(:all) do
       OpenStruct.prepend(ProductionOpenStruct)
