@@ -17,7 +17,7 @@ object.foo # => "bix"
 
 It is not a good idea to use OpenStruct in your production code. It is much more efficient and safer to just define some simple classes or use `Struct` rather than using OpenStruct. However, not everyone sticks to this and you can end up with external libraries in your application that do use OpenStruct.
 
-This gem solves the production performance problem by simply overriding the code in OpenStruct that defines singleton methods. This doesn't have any functional change on OpenStruct objects; you can still use the attribute reader and writer methods. However, these will now go through `method_missing` which adds its own overhead. However, the additional overhead is limited to just the code reference the OpenStruct objects. The global Ruby method cache will not be affected.
+This gem solves the OpenStruct performance issues by simply overriding the code in OpenStruct that defines singleton methods. This doesn't have any functional affect on OpenStruct objects; you can still use the attribute reader and writer methods. However, these will now go through `method_missing` every time you call them. This does add its own overhead but which is far more performant in most cases than defining dynamic methods. Furthermore, the global method cache is no longer impacted by creating OpenStruct objects.
 
 ## Usage
 
