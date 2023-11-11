@@ -4,6 +4,8 @@ require "ostruct"
 
 # Overrides OpenStruct behavior to no longer define singleton methods on each object.
 module ProductionOpenStruct
+  # @param name [Symbol, String] the name of the field to delete
+  # @return [void]
   def delete_field(name)
     sym = name.to_sym
     @table.delete(sym) do
