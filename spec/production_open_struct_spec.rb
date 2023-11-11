@@ -18,8 +18,8 @@ require_relative "spec_helper"
 
       expect(object.foo).to eq "bar"
       expect(object.respond_to?(:foo)).to eq true
-      expect(object.respond_to?("foo")).to eq true
-      expect(object.respond_to?("foo=")).to eq true
+      expect(object.respond_to?(:foo)).to eq true
+      expect(object.respond_to?(:foo=)).to eq true
 
       object.foo = "bap"
       expect(object.foo).to eq "bap"
@@ -30,14 +30,14 @@ require_relative "spec_helper"
 
       expect(object.biz).to eq nil
       expect(object.respond_to?(:biz)).to eq false
-      expect(object.respond_to?("biz")).to eq false
-      expect(object.respond_to?("biz=")).to eq false
+      expect(object.respond_to?(:biz)).to eq false
+      expect(object.respond_to?(:biz=)).to eq false
 
       object["biz"] = "buz"
       expect(object.biz).to eq "buz"
       expect(object.respond_to?(:biz)).to eq true
-      expect(object.respond_to?("biz")).to eq true
-      expect(object.respond_to?("biz=")).to eq true
+      expect(object.respond_to?(:biz)).to eq true
+      expect(object.respond_to?(:biz=)).to eq true
     end
 
     it "should remove getters and setters" do
@@ -45,8 +45,8 @@ require_relative "spec_helper"
       object.delete_field(:foo)
       expect(object.foo).to eq nil
       expect(object.respond_to?(:foo)).to eq false
-      expect(object.respond_to?("foo")).to eq false
-      expect(object.respond_to?("foo=")).to eq false
+      expect(object.respond_to?(:foo)).to eq false
+      expect(object.respond_to?(:foo=)).to eq false
     end
 
     it "should require removal of attributes for obects to be equal" do
