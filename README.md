@@ -1,8 +1,9 @@
+# Production OpenStuct
+
 [![Continuous Integration](https://github.com/bdurand/production_open_struct/actions/workflows/continuous_integration.yml/badge.svg)](https://github.com/bdurand/production_open_struct/actions/workflows/continuous_integration.yml)
 [![Regression Test](https://github.com/bdurand/production_open_struct/actions/workflows/regression_test.yml/badge.svg)](https://github.com/bdurand/production_open_struct/actions/workflows/regression_test.yml)
 [![Ruby Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://github.com/testdouble/standard)
-
-# Production OpenStuct
+[![Gem Version](https://badge.fury.io/rb/production_open_struct.svg)](https://badge.fury.io/rb/production_open_struct)
 
 This gem overrides behavior in the [OpenStruct](https://github.com/ruby/ostruct) implementation defined in the Ruby standard library. While OpenStruct can be useful for one off scripts or as testing mocks, it can cause performance issues in production environments.
 
