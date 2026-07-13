@@ -26,6 +26,9 @@ Gem::Specification.new do |spec|
 
   spec.require_paths = ["lib"]
 
+  # ostruct is no longer a default gem as of Ruby 4.0.
+  spec.add_dependency "ostruct"
+
   spec.add_development_dependency "bundler"
 
   spec.required_ruby_version = ">= 2.5"

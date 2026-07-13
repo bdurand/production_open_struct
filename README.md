@@ -1,4 +1,4 @@
-# Production OpenStuct
+# Production OpenStruct
 
 [![Continuous Integration](https://github.com/bdurand/production_open_struct/actions/workflows/continuous_integration.yml/badge.svg)](https://github.com/bdurand/production_open_struct/actions/workflows/continuous_integration.yml)
 [![Regression Test](https://github.com/bdurand/production_open_struct/actions/workflows/regression_test.yml/badge.svg)](https://github.com/bdurand/production_open_struct/actions/workflows/regression_test.yml)
@@ -14,12 +14,12 @@ OpenStruct defines singleton methods on every object created for each key in the
 object = OpenStruct.new(foo: "bar")
 object.foo # => "bar"
 object.foo = "biz"
-object.foo # => "bix"
+object.foo # => "biz"
 ```
 
 It is not a good idea to use OpenStruct in your production code. It is much more efficient and safer to just define some simple classes or use `Struct` rather than using OpenStruct. However, not everyone sticks to this and you can end up with external libraries in your application that do use OpenStruct.
 
-This gem solves the OpenStruct performance issues by simply overriding the code in OpenStruct that defines singleton methods. This doesn't have any functional affect on OpenStruct objects; you can still use the attribute reader and writer methods. However, these will now go through `method_missing` every time you call them. This does add its own overhead but it is far more performant in most cases than defining dynamic methods. Furthermore, the global method cache is no longer impacted by creating OpenStruct objects.
+This gem solves the OpenStruct performance issues by simply overriding the code in OpenStruct that defines singleton methods. This doesn't have any functional effect on OpenStruct objects; you can still use the attribute reader and writer methods. However, these will now go through `method_missing` every time you call them. This does add its own overhead but it is far more performant in most cases than defining dynamic methods. Furthermore, the global method cache is no longer impacted by creating OpenStruct objects.
 
 ## Usage
 
@@ -27,6 +27,12 @@ Nothing is needed to use this gem other than requiring it.
 
 ```ruby
 require "production_open_struct"
+```
+
+If you need to disable the OpenStruct patch (for instance, to compare behavior in a test suite), you can set the `PRODUCTION_OPEN_STRUCT_AUTO_INCLUDE` environment variable to `false` before the gem is required. You can then opt in manually with:
+
+```ruby
+OpenStruct.prepend(ProductionOpenStruct)
 ```
 
 ## Installation
