@@ -60,4 +60,4 @@ module ProductionOpenStruct
   end
 end
 
-OpenStruct.prepend(ProductionOpenStruct) unless ENV["PRODUCTION_OPEN_STRUCT_AUTO_INCLUDE"] == "false"
+OpenStruct.send(:prepend, ProductionOpenStruct) unless ENV["PRODUCTION_OPEN_STRUCT_AUTO_INCLUDE"] == "false"
