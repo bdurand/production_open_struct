@@ -6,8 +6,6 @@ ENV["BUNDLE_GEMFILE"] ||= File.expand_path("../Gemfile", __dir__)
 
 require "bundler/setup" if File.exist?(ENV["BUNDLE_GEMFILE"])
 
-require_relative "../lib/production_open_struct"
-
 begin
   require "simplecov"
   SimpleCov.start do
@@ -16,6 +14,16 @@ begin
 rescue LoadError
 end
 
+Bundler.require(:default, :test)
+
+require_relative "../lib/production_open_struct"
+
 RSpec.configure do |config|
   config.warnings = true
+  config.disable_monkey_patching!
+  config.default_formatter = "doc" if config.files_to_run.one?
+  # The suite must run in defined order: the "without ProductionOpenStruct"
+  # groups run first, then an after(:all) hook prepends the module (which
+  # cannot be undone) so the "with" groups test the patched behavior.
+  config.order = :defined
 end
